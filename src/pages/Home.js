@@ -18,6 +18,26 @@ const Home = () => {
     navigate("/login");
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = await axios.get("api/auth/delete", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200) {
+        alert(response.data.message);
+        handleLogout();
+      }
+    } catch (error) {
+      if (error?.message && error?.response) {
+        alert(error.response.data.message);
+      } else {
+        alert(error.message);
+      }
+    }
+  };
+
   const handleChangePassword = async (e) => {
     e.preventDefault();
     try {
@@ -30,8 +50,12 @@ const Home = () => {
         alert(response.data.message);
         handleLogout();
       }
-    } catch (e) {
-      alert(e.response.data.message);
+    } catch (error) {
+      if (error?.message && error?.response) {
+        alert(error.response.data.message);
+      } else {
+        alert(error.message);
+      }
     }
   };
 
@@ -113,6 +137,14 @@ const Home = () => {
                         </button>
                       </div>
                     </form>
+                    <div className="pt-1 mb-4">
+                      <button
+                        className="btn btn-danger btn-lg btn-block"
+                        onClick={handleDelete}
+                      >
+                        Delete account
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

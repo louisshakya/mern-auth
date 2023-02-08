@@ -22,10 +22,10 @@ const Login = () => {
         navigate("/");
       }
     } catch (error) {
-      if (error?.message) {
-        alert(error.message);
-      } else {
+      if (error?.message && error?.response) {
         alert(error.response.data.message);
+      } else {
+        alert(error.message);
       }
     }
   };
@@ -41,10 +41,10 @@ const Login = () => {
         setUsers(response.data.users);
       }
     } catch (error) {
-      if (error?.message) {
-        alert(error.message);
-      } else {
+      if (error?.message && error?.response) {
         alert(error.response.data.message);
+      } else {
+        alert(error.message);
       }
     }
   };

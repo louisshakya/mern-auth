@@ -19,7 +19,11 @@ const Register = () => {
         navigate("/login");
       }
     } catch (error) {
-      alert(error.response.data.message);
+      if (error?.message && error?.response) {
+        alert(error.response.data.message);
+      } else {
+        alert(error.message);
+      }
     }
   };
 
